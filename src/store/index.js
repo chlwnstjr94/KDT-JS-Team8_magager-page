@@ -1,6 +1,4 @@
-import {
-  defineStore
-} from 'pinia'
+import { defineStore } from 'pinia'
 
 const BASE_URL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/'
 const headers = {
