@@ -50,7 +50,6 @@ $head-height: 60px;
 header {
   width: 100vw;
   height: $head-height;
-  background-color: #393A3E;
 }
 .head {
   position: fixed;
@@ -59,6 +58,7 @@ header {
   right: 0;
   z-index: 10;
   min-width: 300px;
+  background-color: #393A3E;
   .head__inner {
   height: $head-height;
   padding: 0 8px;
