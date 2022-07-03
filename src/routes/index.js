@@ -1,6 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from './Home'
-import About from './About'
+import AllProduct from './AllProduct'
+import AddProduct from './AddProduct'
+import Login from './Login.vue'
+import SignUp from './SignUp.vue'
+import EditUser from './EditUser.vue'
 
 export default createRouter({
   history: createWebHistory(),
@@ -8,11 +12,27 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      component: Home
+      component: Home,
     },
     {
-      path: '/about',
-      component: About
+      path: '/allproduct',
+      component: AllProduct,
+    },
+    {
+      path: '/addproduct',
+      component: AddProduct,
+    },
+    {
+      path: '/login',
+      component: Login,
+    },
+    {
+      path: '/signup',
+      component: SignUp,
+    },
+    {
+      path: '/user',
+      component: EditUser,
     }
-  ]
+  ],
 })
