@@ -1,33 +1,28 @@
 <template>
   <main>
-    <h1>제품 추가</h1>
+    <form @submit.prevnet="addProduct" class="input-box">
+      <h1>제품 추가</h1>
 
-    <div class="info-box">
-      <p>이모티콘 썸네일</p>
-      <input type="file" @change="thumbnailBase64Img">
-    </div>
-    <div class="info-box">
-      <p>이모티콘 상품명</p>
-      <input type="text" v-model="title">
-    </div>
-    <div class="info-box">
-      <p>이모티콘 태그명</p>
-      <input type="text" v-model="tags">
-    </div>
-    <div class="info-box">
-      <p>이모티콘 상세설명</p>
-      <input type="text" v-model="description">
-    </div>
-    <div class="info-box">
-      <p>이모티콘 가격</p>
-      <input type="text" v-model.number="price">
-    </div>
-    <div class="info-box">
-      <p>이모티콘 상세 사진</p>
-      <input type="file" @change="photoBase64Img">
-    </div>
+      <label for="product-thumbnail">이모티콘 썸네일</label>
+      <input type="file" id="product-thumbnail" @change="thumbnailBase64Img">
 
-    <button @click="addProduct">제출하기</button>
+      <label for="product-title">이모티콘 상품명</label>
+      <input type="text" id="product-title" v-model="title">
+
+      <label for="product-tags">이모티콘 태그명</label>
+      <input type="text" id="product-tags" v-model="tags">
+
+      <label for="product-desc">이모티콘 상세설명</label>
+      <input type="text" id="product-desc" v-model="description">
+
+      <label for="product-price">이모티콘 가격</label>
+      <input type="text" id="product-price" v-model.number="price">
+
+      <label for="product-photo">이모티콘 상세 사진</label>
+      <input type="file" id="product-photo" @change="photoBase64Img">
+
+      <button type="submit" @click="addProduct">제출하기</button>
+    </form>
   </main>
 </template>
 
@@ -52,12 +47,12 @@ export default {
   methods: {
     addProduct() {
       this.indexStore.addProduct({
-      title: this.title,
-      price: this.price,
-      description: this.description, 
-      tags: this.tags.split(','), 
-      thumbnailBase64: this.thumbnailBase64, 
-      photoBase64: this.photoBase64
+        title: this.title,
+        price: this.price,
+        description: this.description, 
+        tags: this.tags.split(','), 
+        thumbnailBase64: this.thumbnailBase64, 
+        photoBase64: this.photoBase64
       })
     },
     thumbnailBase64Img(event) {
@@ -65,7 +60,7 @@ export default {
       for (const file of files) {
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.addEventListener('load', (event) => {
+        reader.addEventListener('load', event => {
           this.thumbnailBase64 = event.target.result
         })
       }
@@ -75,7 +70,7 @@ export default {
       for (const file of files) {
         const reader = new FileReader()
         reader.readAsDataURL(file)
-        reader.addEventListener('load', (event) => {
+        reader.addEventListener('load', event => {
           this.photoBase64 = event.target.result
         })
       }

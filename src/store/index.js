@@ -10,8 +10,7 @@ const headers = {
 export const useIndexStore = defineStore('index', {
   state() {
     return {
-      product: {},
-      productsArray: [],
+      allProducts: [],
       title: '',
       price: '',
       description: '', 
@@ -25,6 +24,9 @@ export const useIndexStore = defineStore('index', {
   },
   actions: {
     // Add product
+    addState(payload) {
+      this.allProducts.push(payload)
+    },
     async addProduct(payload) {
       const { title, price, description, tags, thumbnailBase64, photoBase64 } = payload
       try {
@@ -49,7 +51,7 @@ export const useIndexStore = defineStore('index', {
           }
         )
         console.log(res.data)
-        this.productsArray = res
+        this.addState(res.data)
       } catch {
         console.log(error.response.data)
       }
