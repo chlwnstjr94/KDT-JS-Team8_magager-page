@@ -1,28 +1,35 @@
 <template>
   <main>
-    <form @submit.prevnet="addProduct" class="input-box">
+    <section>
       <h1>제품 추가</h1>
 
-      <label for="product-thumbnail">이모티콘 썸네일</label>
-      <input type="file" id="product-thumbnail" @change="thumbnailBase64Img">
+      <article class="info-box">
+        <p>이모티콘 썸네일</p>
+        <input type="file" @change="thumbnailBase64Img">
+      </article>
+      <article class="info-box">
+        <p>이모티콘 상품명</p>
+        <input type="text" v-model="title">
+      </article>
+      <article class="info-box">
+        <p>이모티콘 태그명</p>
+        <input type="text" v-model="tags">
+      </article>
+      <article class="info-box">
+        <p>이모티콘 상세설명</p>
+        <input type="text" v-model="description">
+      </article>
+      <article class="info-box">
+        <p>이모티콘 가격</p>
+        <input type="text" v-model.number="price">
+      </article>
+      <article class="info-box">
+        <p>이모티콘 상세 사진</p>
+        <input type="file" @change="photoBase64Img">
+      </article>
 
-      <label for="product-title">이모티콘 상품명</label>
-      <input type="text" id="product-title" v-model="title">
-
-      <label for="product-tags">이모티콘 태그명</label>
-      <input type="text" id="product-tags" v-model="tags">
-
-      <label for="product-desc">이모티콘 상세설명</label>
-      <input type="text" id="product-desc" v-model="description">
-
-      <label for="product-price">이모티콘 가격</label>
-      <input type="text" id="product-price" v-model.number="price">
-
-      <label for="product-photo">이모티콘 상세 사진</label>
-      <input type="file" id="product-photo" @change="photoBase64Img">
-
-      <button type="submit" @click="addProduct">제출하기</button>
-    </form>
+      <button @click="addProduct">제출하기</button>
+    </section>
   </main>
 </template>
 

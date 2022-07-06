@@ -23,10 +23,6 @@ export const useIndexStore = defineStore('index', {
     }
   },
   actions: {
-    // Add product
-    addState(payload) {
-      this.allProducts.push(payload)
-    },
     async addProduct(payload) {
       const { title, price, description, tags, thumbnailBase64, photoBase64 } = payload
       try {
@@ -51,11 +47,12 @@ export const useIndexStore = defineStore('index', {
           }
         )
         console.log(res.data)
-        this.addState(res.data)
+        this.allProducts = res.data
       } catch {
         console.log(error.response.data)
       }
     },
+    
     async allProduct(payload) {
       const { id, title, price, description, tags, thumbnail, isSoldOut } = payload
       await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products', {
