@@ -2,11 +2,6 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 
 const BASE_URL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api'
-const headers = {
-  'content-type': 'application/json',
-  apikey: 'FcKdtJs202204',
-  username: 'KDT2TEAM8',
-}
 export const useIndexStore = defineStore('index', {
   state() {
     return {
@@ -53,12 +48,14 @@ export const useIndexStore = defineStore('index', {
       }
     },
     
-    async allProduct(payload) {
+    async allProduct(payload = {}) {
       const { id, title, price, description, tags, thumbnail, isSoldOut } = payload
-      await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products', {
+      const res = await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products', {
         method: 'GET',
         headers: {
-          headers,
+          'content-type': 'application/json',
+          apikey: 'FcKdtJs202204',
+          username: 'KDT2TEAM8',
           masterKey: true
         },
         data: {
@@ -71,6 +68,7 @@ export const useIndexStore = defineStore('index', {
           isSoldOut
         }
       })
+      this.allProducts = res.data
     },
     async allTransactions() {
       await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all', {
