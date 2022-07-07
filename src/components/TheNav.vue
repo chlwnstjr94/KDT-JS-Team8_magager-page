@@ -20,6 +20,9 @@
           <li>
             <RouterLink to="/addproduct">제품 추가</RouterLink>
           </li>
+          <li>
+            <RouterLink to="/transactionsall">거래 내역</RouterLink>
+          </li>
         </ul>
         <ul class="list-aside">
           <li v-if="userStore.user" @click="userStore.logoutUser">
