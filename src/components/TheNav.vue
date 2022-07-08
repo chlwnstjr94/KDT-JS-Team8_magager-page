@@ -15,7 +15,7 @@
         </RouterLink>
         <ul class="list-nav">
           <li>
-            <RouterLink to="/allproduct">모든 제품 조회</RouterLink>
+            <RouterLink to="/allproduct">제품 관리</RouterLink>
           </li>
           <li>
             <RouterLink to="/addproduct">제품 추가</RouterLink>

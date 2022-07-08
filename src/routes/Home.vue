@@ -1,25 +1,51 @@
 <template>
   <main>
-    <h1>Home page..</h1>
+    <h1>제품 조회</h1>
+
+    <ul>
+      <AllProductsList
+        v-for="product in indexStore.allProducts"
+        :key="product.id"
+        :product="product"/>
+    </ul>
   </main>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
-import { useUserStore } from '~/store/user'
+import { useIndexStore } from '~/store'
+import AllProductsList from '~/components/AllProductsList.vue'
+
 export default {
-  created() {
-    //this.userStore.authUser()
+  components: {
+    AllProductsList
   },
   computed: {
-    ...mapStores(useUserStore),
+    ...mapStores(useIndexStore)
   },
-  watch: {},
+  created() {
+    this.indexStore.allProduct()
+  },
+  methods: {
+    allProducts() {
+      this.indexStore.allProduct({
+        id: this.id,
+        title: this.title,
+        price: this.price,
+        description: this.description,
+        tags: this.tags.split(','),
+        thumbnail: this. thumbnail,
+        isSoldOut: this.isSoldOut
+      })
+    }
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 main {
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #eee;
 }
 </style>

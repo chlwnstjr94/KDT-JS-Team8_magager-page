@@ -1,13 +1,12 @@
 <template>
   <main>
-    <h1>모든 제품 조회</h1>
+    <h1>제품 관리</h1>
 
     <ul>
-      <AllProductsList
+      <ProductsManagementList
         v-for="product in indexStore.allProducts"
         :key="product.id"
         :product="product"/>
-      
     </ul>
   </main>
 </template>
@@ -15,11 +14,11 @@
 <script>
 import { mapStores } from 'pinia'
 import { useIndexStore } from '~/store'
-import AllProductsList from '~/components/AllProductsList.vue'
+import ProductsManagementList from '~/components/ProductsManagementList.vue'
 
 export default {
   components: {
-    AllProductsList
+    ProductsManagementList
   },
   computed: {
     ...mapStores(useIndexStore)
