@@ -1,5 +1,17 @@
 <template>
-<h1>전체 판매 내역</h1>
+  <h1>전체 판매 내역</h1>
+
+  <ul>
+    <li
+      v-for="product in indexStore.allTransactions"
+      :key="product.id"
+      :product="product">
+      {{ product.title }}
+      {{ product.user.email }}
+      {{ product.user.displayName }}
+      {{ product.user.profileImg }}
+    </li>
+  </ul>
 </template>
 
 <script>
