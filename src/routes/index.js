@@ -3,6 +3,7 @@ import Home from './Home.vue'
 import AllProduct from './AllProduct.vue'
 import AddProduct from './AddProduct.vue'
 import TransactionsAll from './TransactionsAll.vue'
+import EditProduct from './EditProduct.vue'
 import Login from './Login.vue'
 import SignUp from './SignUp.vue'
 import EditUser from './EditUser.vue'
@@ -26,6 +27,10 @@ export default createRouter({
     {
       path: '/transactionsall',
       component: TransactionsAll,
+    },
+    {
+      path: '/editproduct',
+      component: EditProduct,
     },
     {
       path: '/login',

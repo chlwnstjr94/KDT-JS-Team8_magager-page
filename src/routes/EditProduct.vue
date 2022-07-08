@@ -24,11 +24,18 @@
         <input type="text" v-model.number="price">
       </article>
       <article class="info-box">
+        <p>이모티콘 매진</p>
+        <!-- <div class="soldout-box" v-model="isSoldOut">
+          <p v-if="{isSoldOut = false}">매진</p>
+          <p v-if="{isSoldOut = true}">매진 취소</p>
+        </div> -->
+      </article>
+      <article class="info-box">
         <p>이모티콘 상세 사진</p>
         <input type="file" @change="photoBase64Img">
       </article>
 
-      <button @click="addProduct">제출하기</button>
+      <button @click="editProduct">수정 완료</button>
     </section>
   </main>
 </template>
@@ -38,6 +45,7 @@ import { mapStores } from 'pinia'
 import { useIndexStore } from '~/store'
 
 export default {
+  name: "EditProduct",
   data() {
     return {
       title: '',
@@ -53,8 +61,8 @@ export default {
     ...mapStores(useIndexStore)
   },
   methods: {
-    addProduct() {
-      this.indexStore.productUpdated({
+    editProduct() {
+      this.indexStore.editProduct({
         title: this.title,
         price: this.price,
         description: this.description, 

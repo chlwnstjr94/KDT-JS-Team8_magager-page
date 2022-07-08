@@ -121,7 +121,7 @@ export const useIndexStore = defineStore('index', {
       })
     },
 
-    async productUpdated(payload) {
+    async editProduct(payload) {
       const { id, title, price, description, tags, thumbnailBase64, photoBase64, isSoldOut } = payload
       const res = await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/${id}`, {
         method: 'PUT',
