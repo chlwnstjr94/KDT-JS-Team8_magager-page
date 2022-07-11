@@ -5,6 +5,7 @@ const BASE_URL = 'https://asia-northeast3-heropy-api.cloudfunctions.net/api'
 export const useIndexStore = defineStore('index', {
   state() {
     return {
+      product: {},
       allProducts: [],
       transactions: [],
       title: '',
@@ -52,14 +53,29 @@ export const useIndexStore = defineStore('index', {
         )
         console.log(res.data)
         this.allProducts = res.data
+
+        window.location.href = '/'
       } catch {
         console.log(error.response.data)
       }
     },
     
-    async allProduct(payload = {}) {
-      const { id, title, price, description, tags, thumbnail, isSoldOut } = payload
+    async allProduct() {
       const res = await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products', {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+          apikey: 'FcKdtJs202204',
+          username: 'KDT2TEAM8',
+          masterKey: true
+        }
+      })
+      this.allProducts = res.data
+    },
+
+    async productDetails(payload) {
+      const { id, title, price, description, tags, thumbnail, photo, isSoldOut } = payload
+      const res = await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -74,10 +90,11 @@ export const useIndexStore = defineStore('index', {
           description,
           tags,
           thumbnail,
+          photo,
           isSoldOut
         }
       })
-      this.allProducts = res.data
+      this.product = res.data
     },
 
     async allTransactions(payload = {}) {
@@ -141,7 +158,22 @@ export const useIndexStore = defineStore('index', {
           isSoldOut
         }
       })
-      this.allProducts = res.data
+      this.product = res.data
+
+      // this.allProduct()
+    },
+
+    async deleteProduct(id) {
+        await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'content-type': 'application/json',
+          apikey: 'FcKdtJs202204',
+          username: 'KDT2TEAM8',
+          masterKey: true
+        }
+      })
+      this.allProduct()
     }
   }
 })
