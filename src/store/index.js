@@ -73,25 +73,13 @@ export const useIndexStore = defineStore('index', {
       this.allProducts = res.data
     },
 
-    async productDetails(payload) {
-      const { id, title, price, description, tags, thumbnail, photo, isSoldOut } = payload
+    async productDetails(id) {
       const res = await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json',
           apikey: 'FcKdtJs202204',
-          username: 'KDT2TEAM8',
-          masterKey: true
-        },
-        data: {
-          id,
-          title,
-          price,
-          description,
-          tags,
-          thumbnail,
-          photo,
-          isSoldOut
+          username: 'KDT2TEAM8'
         }
       })
       this.product = res.data

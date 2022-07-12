@@ -6,7 +6,8 @@
       <AllProductsList
         v-for="product in indexStore.allProducts"
         :key="product.id"
-        :product="product"/>
+        :product="product"
+        @click="$router.push(`/detailsproduct/${product.id}`)"/>
     </ul>
   </main>
 </template>
@@ -26,19 +27,19 @@ export default {
   created() {
     this.indexStore.allProduct()
   },
-  methods: {
-    allProducts() {
-      this.indexStore.allProduct({
-        id: this.id,
-        title: this.title,
-        price: this.price,
-        description: this.description,
-        tags: this.tags.split(','),
-        thumbnail: this. thumbnail,
-        isSoldOut: this.isSoldOut
-      })
-    }
-  }
+  // methods: {
+  //   allProducts() {
+  //     this.indexStore.allProduct({
+  //       id: this.id,
+  //       title: this.title,
+  //       price: this.price,
+  //       description: this.description,
+  //       tags: this.tags.split(','),
+  //       thumbnail: this. thumbnail,
+  //       isSoldOut: this.isSoldOut
+  //     })
+  //   }
+  // }
 }
 </script>
 

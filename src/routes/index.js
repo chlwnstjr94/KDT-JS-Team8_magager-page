@@ -4,6 +4,7 @@ import AllProduct from './AllProduct.vue'
 import AddProduct from './AddProduct.vue'
 import TransactionsAll from './TransactionsAll.vue'
 import EditProduct from './EditProduct.vue'
+import DetailsProduct from './DetailsProduct.vue'
 import Login from './Login.vue'
 import SignUp from './SignUp.vue'
 import EditUser from './EditUser.vue'
@@ -14,11 +15,16 @@ export default createRouter({
   routes: [
     {
       path: '/',
-      component: Home,
+      component: Home
     },
     {
       path: '/allproduct',
       component: AllProduct,
+    },
+    {
+      name: 'EditProduct',
+      path: '/editproduct/:id',
+      component: EditProduct
     },
     {
       path: '/addproduct',
@@ -29,8 +35,8 @@ export default createRouter({
       component: TransactionsAll,
     },
     {
-      path: '/editproduct',
-      component: EditProduct,
+      path: '/detailsproduct/:id',
+      component: DetailsProduct,
     },
     {
       path: '/login',
@@ -44,5 +50,5 @@ export default createRouter({
       path: '/user',
       component: EditUser,
     }
-  ],
+  ]
 })
