@@ -24,7 +24,8 @@ export default createRouter({
     {
       name: 'EditProduct',
       path: '/editproduct/:id',
-      component: EditProduct
+      component: EditProduct,
+      props: true
     },
     {
       path: '/addproduct',

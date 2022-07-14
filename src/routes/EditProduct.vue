@@ -1,41 +1,42 @@
 <template>
   <main>
     <section>
-      <h1>제품 추가</h1>
+      <h1>제품 수정</h1>
 
-      <article class="info-box">
-        <p>이모티콘 썸네일</p>
-        <input type="file" @change="thumbnailBase64Img">
-      </article>
-      <article class="info-box">
-        <p>이모티콘 상품명</p>
-        <input type="text" v-model="title">
-      </article>
-      <article class="info-box">
-        <p>이모티콘 태그명</p>
-        <input type="text" v-model="tags">
-      </article>
-      <article class="info-box">
-        <p>이모티콘 상세설명</p>
-        <input type="text" v-model="description">
-      </article>
-      <article class="info-box">
-        <p>이모티콘 가격</p>
-        <input type="text" v-model.number="price">
-      </article>
-      <article class="info-box">
-        <p>이모티콘 매진</p>
-        <!-- <div class="soldout-box" v-model="isSoldOut">
-          <p v-if="{isSoldOut = false}">매진</p>
-          <p v-if="{isSoldOut = true}">매진 취소</p>
-        </div> -->
-      </article>
-      <article class="info-box">
-        <p>이모티콘 상세 사진</p>
-        <input type="file" @change="photoBase64Img">
-      </article>
-
-      <button @click="editProduct">수정 완료</button>
+      <form @submit.prevent="editProduct()">
+        <article class="info-box">
+          <p>이모티콘 썸네일</p>
+          <img :src="thumbnailBase64" :alt="title">
+          <input type="file" @change="thumbnailBase64Img">
+        </article>
+        <article class="info-box">
+          <p>이모티콘 상품명</p>
+          <input type="text" v-model="title">
+        </article>
+        <article class="info-box">
+          <p>이모티콘 태그명</p>
+          <input type="text" v-model="tags">
+        </article>
+        <article class="info-box">
+          <p>이모티콘 상세설명</p>
+          <input type="text" v-model="description">
+        </article>
+        <article class="info-box">
+          <p>이모티콘 가격</p>
+          <input type="text" v-model.number="price">
+        </article>
+        <article class="info-box">
+          <p v-if="isSoldOut">이모티콘 판매중</p>
+          <p v-else>이모티콘 매진</p>
+          <input type="checkbox" class="checkbox" v-model="isSoldOut">
+        </article>
+        <article class="info-box">
+          <p>이모티콘 상세 사진</p>
+          <img :src="photoBase64" :alt="title">
+          <input type="file" @change="photoBase64Img">
+        </article>
+        <button>수정 완료</button>
+      </form>
     </section>
   </main>
 </template>
@@ -45,24 +46,58 @@ import { mapStores } from 'pinia'
 import { useIndexStore } from '~/store'
 
 export default {
-  name: "EditProduct",
+  props:{
+    oldTitle: {
+      type: String,
+      default: ''
+    },
+    oldPrice: {
+      type: String,
+      default: ''
+    },
+    oldDescription: {
+      type: String,
+      default: ''
+    },
+    oldTags: {
+      type: Array,
+      default: () => []
+    },
+    oldThumbnailBase64: {
+      type: String,
+      default: ''
+    },
+    oldPhotoBase64: {
+      type: String,
+      default: ''
+    },
+    oldIsSoldout: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      title: '',
-      price: 100,
-      description: '', 
-      tags: '', 
-      thumbnailBase64: '', 
-      photoBase64: '',
-      isSoldOut: false
+      // id: this.$route.params.id,
+      title: this.oldTitle,
+      price: this.oldPrice,
+      description: this.oldDescription, 
+      tags: this.oldTags, 
+      thumbnailBase64: this.oldThumbnailBase64, 
+      photoBase64: this.oldPhotoBase64,
+      isSoldOut: this.oldIsSoldout
     }
   },
   computed: {
     ...mapStores(useIndexStore)
   },
+  // created() {
+  //   this.indexStore.productDetails(this.$route.params.id)
+  // },
   methods: {
     editProduct() {
       this.indexStore.editProduct({
+        id: this.$route.params.id,
         title: this.title,
         price: this.price,
         description: this.description, 
@@ -99,7 +134,13 @@ export default {
 <style lang="scss" scoped>
 main {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #eee;
+}
+
+.checkbox {
+  width: 10px;
+  height: 10px;
+  background: #000;
 }
 </style>

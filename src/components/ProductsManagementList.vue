@@ -1,30 +1,25 @@
 <template>
-  <RouterLink :to="`/editproduct/${product.id}`">
+  <button>
+    <RouterLink :to="{
+      name: 'EditProduct',
+      params:{ 
+        id: product.id,
+        oldTitle: product.title,
+        oldPrice: product.price,
+        oldDescription: product.description,
+        oldTags: product.tags.toString(),
+        oldThumbnailBase64: product.thumbnail,
+        oldPhotoBase64: product.photo,
+        oldIsSoldout: product.isSoldout
+      }
+    }">
+      <ion-icon name="create-outline"></ion-icon>
+    </RouterLink>
+  </button>
+  <!-- <button
+  @click="$router.push(`/editproduct/${product.id}`)">
     <ion-icon name="create-outline"></ion-icon>
-  </RouterLink>
-  <!-- <RouterLink :to="{
-    path: `/editproduct/${product.id}`,
-    name: 'EditProduct',
-    // params: {
-    //   id: product.id,
-    //   title: product.title,
-    //   price: product.price,
-    //   description: product.description,
-    //   tags: product.tags,
-    //   thumbnailBase64: product.thumbnailBase64, 
-    //   photoBase64: product.photoBase64
-    // }
-    params:{ 
-      id: product.id,
-      oldTitle: product.title,
-      oldPrice: product.price,
-      oldDescription: product.description,
-      oldTags: product.tags.toString(),
-      oldThumbnail: product.thumbnail
-    }
-  }">
-    <ion-icon name="create-outline"></ion-icon>
-  </RouterLink> -->
+  </button> -->
   <img 
     v-if="product.thumbnail"
     :src="product.thumbnail" 
@@ -60,7 +55,7 @@ export default {
 
 <style scoped lang="scss">
 img {
-    width: 100px;
-    height: 100px;
-  }
+  width: 100px;
+  height: 100px;
+}
 </style>
