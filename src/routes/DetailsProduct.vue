@@ -6,7 +6,11 @@
   :alt="indexStore.product.title">
 
   <h2>{{ indexStore.product.title }}</h2>
-  <p>{{ indexStore.product.tags }}</p>
+  <p 
+    v-for="tag in indexStore.product.tags"
+    :key="tag">
+    # {{ tag }}
+  </p>
   <p>{{ indexStore.product.description }}</p>
   <p>{{ indexStore.product.price }}</p>
   <img 
@@ -31,10 +35,6 @@ export default {
     this.indexStore.productDetails(this.id)
   },
   methods: {
-    tags(){
-      const tags = indexStore.product.tags
-      return 
-    },
     productDetails(id) {
       this.indexStore.productDetails(id)
     }
