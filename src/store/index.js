@@ -15,7 +15,6 @@ export const useIndexStore = defineStore('index', {
       thumbnailBase64: '', 
       photoBase64: '',
       id: '',
-      thumbnail: '',
       isSoldOut: false,
       detailId: '',
       isCanceled: false,
@@ -65,6 +64,7 @@ export const useIndexStore = defineStore('index', {
           masterKey: true
         }
       })
+      console.log(res.data)
       this.allProducts = res.data
     },
 
@@ -116,7 +116,6 @@ export const useIndexStore = defineStore('index', {
       const { id, title, price, description, tags, thumbnailBase64, photoBase64, isSoldOut } = payload
       const res = await axios({
         url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`,
-        id,
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -134,7 +133,8 @@ export const useIndexStore = defineStore('index', {
           isSoldOut
         }
       })
-      this.product = res.data
+      // this.product = res.data
+      // this.allProduct()
 
       window.location.href = '/allproduct'
     },

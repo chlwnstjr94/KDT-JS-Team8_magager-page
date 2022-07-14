@@ -9,7 +9,6 @@
         oldDescription: product.description,
         oldTags: product.tags.toString(),
         oldThumbnailBase64: product.thumbnail,
-        oldPhotoBase64: product.photo,
         oldIsSoldout: product.isSoldout
       }
     }">
@@ -24,7 +23,8 @@
     v-if="product.thumbnail"
     :src="product.thumbnail" 
     :alt="product.title">
-  <h4>{{ product.title}}</h4>
+  <h4>{{ product.title }}</h4>
+  <h4>{{ product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원' }}</h4>
 
   <button @click="deleteProduct(product.id)">
     <ion-icon name="trash-outline"></ion-icon>

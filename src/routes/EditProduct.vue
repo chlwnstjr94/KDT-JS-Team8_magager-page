@@ -7,7 +7,7 @@
         <article class="info-box">
           <p>이모티콘 썸네일</p>
           <img :src="thumbnailBase64" :alt="title">
-          <input type="file" @change="thumbnailBase64Img">
+          <input type="file"  @change="thumbnailBase64Img">
         </article>
         <article class="info-box">
           <p>이모티콘 상품명</p>
@@ -32,7 +32,8 @@
         </article>
         <article class="info-box">
           <p>이모티콘 상세 사진</p>
-          <img :src="photoBase64" :alt="title">
+          <img v-if="!photoBase64" :src="indexStore.product.photo" :alt="title">
+          <img v-else :src="photoBase64" :alt="title">
           <input type="file" @change="photoBase64Img">
         </article>
         <button>수정 완료</button>
@@ -52,7 +53,7 @@ export default {
       default: ''
     },
     oldPrice: {
-      type: String,
+      type: Number,
       default: ''
     },
     oldDescription: {
@@ -67,10 +68,6 @@ export default {
       type: String,
       default: ''
     },
-    oldPhotoBase64: {
-      type: String,
-      default: ''
-    },
     oldIsSoldout: {
       type: Boolean,
       default: false
@@ -78,36 +75,73 @@ export default {
   },
   data() {
     return {
-      // id: this.$route.params.id,
       title: this.oldTitle,
       price: this.oldPrice,
       description: this.oldDescription, 
       tags: this.oldTags, 
       thumbnailBase64: this.oldThumbnailBase64, 
-      photoBase64: this.oldPhotoBase64,
-      isSoldOut: this.oldIsSoldout
+      photoBase64: this.photoBase64,
+      isSoldOut: this.oldIsSoldout,
+      changeThumbnail: false,
+      changePhoto: false
     }
   },
   computed: {
     ...mapStores(useIndexStore)
   },
-  // created() {
-  //   this.indexStore.productDetails(this.$route.params.id)
-  // },
+  created() {
+    this.indexStore.productDetails(this.$route.params.id)
+  },
   methods: {
     editProduct() {
-      this.indexStore.editProduct({
-        id: this.$route.params.id,
-        title: this.title,
-        price: this.price,
-        description: this.description, 
-        tags: this.tags.split(','), 
-        thumbnailBase64: this.thumbnailBase64, 
-        photoBase64: this.photoBase64,
-        isSoldOut: this.isSoldOut
-      })
+      if (this.changeThumbnail && this.changePhoto) {
+        this.indexStore.editProduct({
+          id: this.$route.params.id,
+          title: this.title,
+          price: this.price,
+          description: this.description, 
+          tags: this.tags.split(','), 
+          thumbnailBase64: this.thumbnailBase64,
+          photoBase64: this.photoBase64, 
+          isSoldOut: this.isSoldOut
+        })
+      } else if (this.changeThumbnail && !this.changePhoto) {
+        this.indexStore.editProduct({
+          id: this.$route.params.id,
+          title: this.title,
+          price: this.price,
+          description: this.description, 
+          tags: this.tags.split(','), 
+          thumbnailBase64: this.thumbnailBase64,
+          photoBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
+          isSoldOut: this.isSoldOut
+        })
+      } else if (!this.changeThumbnail && this.changePhoto) {
+        this.indexStore.editProduct({
+          id: this.$route.params.id,
+          title: this.title,
+          price: this.price,
+          description: this.description, 
+          tags: this.tags.split(','), 
+          thumbnailBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
+          photoBase64: this.photoBase64, 
+          isSoldOut: this.isSoldOut
+        })
+      } else {
+        this.indexStore.editProduct({
+          id: this.$route.params.id,
+          title: this.title,
+          price: this.price,
+          description: this.description, 
+          tags: this.tags.split(','), 
+          thumbnailBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
+          photoBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
+          isSoldOut: this.isSoldOut
+        })
+      }
     },
     thumbnailBase64Img(event) {
+      this.changeThumbnail = true
       const { files } = event.target
       for (const file of files) {
         const reader = new FileReader()
@@ -118,6 +152,7 @@ export default {
       }
     },
     photoBase64Img(event) {
+      this.changePhoto = true
       const { files } = event.target
       for (const file of files) {
         const reader = new FileReader()
