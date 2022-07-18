@@ -288,14 +288,19 @@ main {
     justify-content: center;
     margin-top: 40px;
     .submit-btn {
-    width: 256px;
-    height: 64px;
-    font-size: 18px;
-    color: #1e1e1e;
-    background: #fcd207;
-    border: 1px solid #ffbb1b;
-    border-radius: 10px;
-  }
+      width: 256px;
+      height: 64px;
+      font-size: 18px;
+      color: #1e1e1e;
+      background: #fcd207;
+      border: 1px solid #ffbb1b;
+      border-radius: 10px;
+      transition: 0.5s;
+      &:hover {
+        background: #efc706;
+        border-color: #f2b119;
+      }
+    }
   }
   .emoticon {
     width: 6px;
