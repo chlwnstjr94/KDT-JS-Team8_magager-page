@@ -1,8 +1,8 @@
 <template>
   <main>
-    <h1>제품 조회</h1>
+    <div class="img-emoticon">Open stuido</div>
 
-    <ul>
+    <ul class="product-list">
       <AllProductsList
         v-for="product in indexStore.allProducts"
         :key="product.id"
@@ -26,20 +26,7 @@ export default {
   },
   created() {
     this.indexStore.allProduct()
-  },
-  // methods: {
-  //   allProducts() {
-  //     this.indexStore.allProduct({
-  //       id: this.id,
-  //       title: this.title,
-  //       price: this.price,
-  //       description: this.description,
-  //       tags: this.tags.split(','),
-  //       thumbnail: this. thumbnail,
-  //       isSoldOut: this.isSoldOut
-  //     })
-  //   }
-  // }
+  }
 }
 </script>
 
@@ -47,6 +34,28 @@ export default {
 main {
   width: 100%;
   min-height: 100vh;
-  background-color: #eee;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .img-emoticon {
+    width: 188px;
+    height: 37px;
+    background: url(https://emoticonstudio.kakao.com/assets/img_emoticon-ea608e99e1dc9b9ce96ee6e5a5e906ff88d982ff4c564358eb2dd6420a47d551.png) no-repeat;
+    background-position: 0 -340px;
+    text-indent: -9999px;
+    position: relative;
+    top: -10px;
+  }
+  .product-list {
+    margin-top: 20px;
+    padding: 0 20px;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 }
 </style>
