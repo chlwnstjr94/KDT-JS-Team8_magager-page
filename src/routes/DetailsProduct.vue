@@ -1,21 +1,23 @@
 <template>
-  <h1>상세 조회</h1>
+  <main>
+    <h1>상세 조회</h1>
 
-  <img 
-  :src="indexStore.product.thumbnail" 
-  :alt="indexStore.product.title">
+    <img 
+    :src="indexStore.product.thumbnail" 
+    :alt="indexStore.product.title">
 
-  <h2>{{ indexStore.product.title }}</h2>
-  <p 
-    v-for="tag in indexStore.product.tags"
-    :key="tag">
-    # {{ tag }}
-  </p>
-  <p>{{ indexStore.product.description }}</p>
-  <p>{{ indexStore.product.price }}</p>
-  <img 
-  :src="indexStore.product.photo" 
-  :alt="indexStore.product.title">
+    <h2>{{ indexStore.product.title }}</h2>
+    <p 
+      v-for="tag in indexStore.product.tags"
+      :key="tag">
+      # {{ tag }}
+    </p>
+    <p>{{ indexStore.product.description }}</p>
+    <p>{{ indexStore.product.price }}</p>
+    <img 
+    :src="indexStore.product.photo" 
+    :alt="indexStore.product.title">
+  </main>
 </template>
 
 <script>
@@ -31,13 +33,23 @@ export default {
   computed: {
     ...mapStores(useIndexStore)
   },
-  created() {
-    this.indexStore.productDetails(this.id)
+  async created() {
+    await this.indexStore.productDetails(this.id);
   },
   methods: {
-    productDetails(id) {
-      this.indexStore.productDetails(id)
+    async productDetails() {
+      await this.indexStore.productDetails({
+        id: this.id
+      });
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+main {
+  width: 100%;
+  min-height: 100vh;
+  background-color: #eee;
+}
+</style>
