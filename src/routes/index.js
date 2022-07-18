@@ -46,10 +46,6 @@ export default createRouter({
     {
       path: '/signup',
       component: SignUp,
-    },
-    {
-      path: '/user',
-      component: EditUser,
     }
   ]
 })
