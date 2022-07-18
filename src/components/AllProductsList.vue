@@ -1,17 +1,11 @@
 <template>
-  <div class="product-box">
+  <li class="product-box">
     <img 
     v-if="product.thumbnail"
     :src="product.thumbnail" 
     :alt="product.title">
     <h4>{{ product.title}}</h4>
-    <h4>{{ product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원' }}</h4>
-    <h4 
-      v-for="tag in product.tags"
-      :key="tag">
-    # {{ tag }}
-    </h4>
-  </div>
+  </li>
 </template>
 
 <script>
@@ -32,8 +26,36 @@ export default {
 </script>
 
 <style scoped lang="scss">
-img {
-  width: 100px;
-  height: 100px;
+.product-box {
+  width: 160px;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e6e6e6;
+  border-radius: 12px;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.06);
+  transition: 0.5s;
+  cursor: pointer;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+  }
+  img {
+    width: 100px;
+    height: 100px;
+  }
+  h4 {
+    width: 80%;
+    text-align: center; 
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:hover {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
 }
 </style>

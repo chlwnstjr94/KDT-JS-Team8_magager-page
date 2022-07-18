@@ -1,10 +1,12 @@
 <template>
-  <TheHeader />
-  <div class="main">
-    <TheNav />
-    <RouterView />
+  <div class="body">
+    <TheHeader />
+    <main class="main">
+      <TheNav />
+      <RouterView />
+    </main>
+    <TheFooter />
   </div>
-  <TheFooter />
 </template>
 
 <script>
@@ -23,8 +25,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.body {
+  background: #FCFCFC;
+}
 .main {
   display: flex;
   align-items: flex-start;
+  margin: 20px 10px;
+  gap: 10px;
 }
 </style>
