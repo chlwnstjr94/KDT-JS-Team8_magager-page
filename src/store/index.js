@@ -119,34 +119,34 @@ export const useIndexStore = defineStore('index', {
     },
 
     async editProduct(payload) {
-        const { id, title, price, description, tags, thumbnailBase64, photoBase64, isSoldOut } = payload
-        const res = await axios({
-          url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`,
-          method: 'PUT',
-          headers: {
-            'content-type': 'application/json',
-            apikey: 'FcKdtJs202204',
-            username: 'KDT2TEAM8',
-            masterKey: true
-          },
-          data: {
-            title, 
-            price, 
-            description, 
-            tags, 
-            thumbnailBase64, 
-            photoBase64, 
-            isSoldOut
-          }
-        })
-        console.log(res.data)
-        this.product = res.data
+      const { id, title, price, description, tags, thumbnailBase64, photoBase64, isSoldOut } = payload
+      const res = await axios({
+        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`,
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json',
+          apikey: 'FcKdtJs202204',
+          username: 'KDT2TEAM8',
+          masterKey: true
+        },
+        data: {
+          title, 
+          price, 
+          description, 
+          tags, 
+          thumbnailBase64, 
+          photoBase64, 
+          isSoldOut
+        }
+      })
+      console.log(res.data)
+      this.product = res.data
 
-        // window.location.href = '/allproduct'
+      window.location.href = '/allproduct'
     },
 
     async deleteProduct(id) {
-        await axios({
+      await axios({
         url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, 
         method: 'DELETE',
         headers: {
