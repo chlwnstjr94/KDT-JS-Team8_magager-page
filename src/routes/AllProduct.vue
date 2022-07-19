@@ -22,10 +22,6 @@
         :product="product"/>
       </tbody>
     </table>
-
-    <!-- <ul>
-      
-    </ul> -->
   </main>
 </template>
 
