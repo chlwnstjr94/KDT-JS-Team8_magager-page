@@ -19,7 +19,7 @@
             # {{ tag }}
           </span>
         </div>
-        <p class="detail-price">{{ indexStore.product.price.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",") + '원' }}</p>
+        <p class="detail-price">{{ price }}</p>
         <p class="detail-description">{{ indexStore.product.description }}</p>
       </article>
     </section>
@@ -43,7 +43,11 @@ export default {
     }
   },
   computed: {
-    ...mapStores(useIndexStore)
+    ...mapStores(useIndexStore),
+    price() {
+      const price = Number(this.indexStore.product.price)
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + ' 원'
+    }
   },
   async created() {
     await this.indexStore.productDetails(this.id);
