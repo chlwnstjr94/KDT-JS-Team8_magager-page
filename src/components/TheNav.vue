@@ -58,7 +58,7 @@ export default {
 
 <style lang="scss" scoped>
 nav {
-  width: 230px;
+  min-width: 230px;
   .nav_inner {
     border: 1px solid #e6e6e6;
     background: #fff;
