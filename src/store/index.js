@@ -9,7 +9,7 @@ export const useIndexStore = defineStore('index', {
       allProducts: [],
       transactions: [],
       title: '',
-      price: '',
+      price: 0,
       description: '', 
       tags: '', 
       thumbnailBase64: '', 
@@ -55,7 +55,8 @@ export const useIndexStore = defineStore('index', {
     },
     
     async allProduct() {
-      const res = await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products', {
+      const res = await axios({
+        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products',
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -69,7 +70,8 @@ export const useIndexStore = defineStore('index', {
     },
 
     async productDetails(id) {
-      const res = await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
+      const res = await axios({
+        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`,
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -82,7 +84,8 @@ export const useIndexStore = defineStore('index', {
     },
 
     async allTransactions() {
-      const res = await axios('https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all', {
+      const res = await axios({
+        url: 'https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/all',
         method: 'GET',
         headers: {
           'content-type': 'application/json',
@@ -91,13 +94,15 @@ export const useIndexStore = defineStore('index', {
           masterKey: true
         }
       })
+      console.log(res.data)
       this.transactions = res.data
     },
 
     async transactionsCanceled(payload) {
       const { detailId, isCanceled, done } = payload
-      const res = await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/${detailId}`, {
+      const res = await axios({
         detailId,
+        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/${detailId}`,
         method: 'PUT',
         headers: {
           'content-type': 'application/json',
@@ -141,7 +146,8 @@ export const useIndexStore = defineStore('index', {
     },
 
     async deleteProduct(id) {
-        await axios(`https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, {
+        await axios({
+        url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/${id}`, 
         method: 'DELETE',
         headers: {
           'content-type': 'application/json',
