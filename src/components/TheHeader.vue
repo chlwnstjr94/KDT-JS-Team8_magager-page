@@ -48,7 +48,7 @@ export default {
 <style lang="scss" scoped>
 $head-height: 60px;
 header {
-  width: 100vw;
+  width: 100%;
   height: $head-height;
 }
 .head {

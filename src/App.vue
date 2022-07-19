@@ -27,11 +27,11 @@ export default {
 <style scoped lang="scss">
 .body {
   background: #FCFCFC;
-}
-.main {
+  .main {
   display: flex;
   align-items: flex-start;
   margin: 20px 10px;
   gap: 10px;
+}
 }
 </style>

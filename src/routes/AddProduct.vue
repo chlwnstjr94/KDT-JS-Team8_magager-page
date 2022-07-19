@@ -134,11 +134,12 @@ export default {
 
 <style lang="scss" scoped>
 main {
-  padding: 0 80px 60px;
   width: 100%;
   min-height: 100vh;
   background-color: #fff;
   border: 1px solid #e6e6e6;
+  padding: 0 40px 60px;
+  box-sizing: border-box;
   .head-title {
     padding: 24px 0 8px;
     margin-bottom: 38px;
