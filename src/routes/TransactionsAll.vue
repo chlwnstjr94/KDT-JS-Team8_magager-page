@@ -1,76 +1,45 @@
 <template>
   <main>
-    <h1>전체 판매 내역</h1>
+    <h2 class="page-title">전체 판매 내역</h2>
 
-    <ul>
-      <li
-        v-for="product in indexStore.allTransactions"
+    <table>
+      <thead>
+        <tr>
+          <th class="table-title"><span>구매 이미지</span></th>
+          <th class="table-title"><span>구매자</span></th>
+          <th class="table-title"><span>구매자 이메일</span></th>
+          <th class="table-title"><span>구매 상품</span></th>
+          <th class="table-title"><span>구매 가격</span></th>
+          <th class="table-title"><span>은행명</span></th>
+          <th class="table-title"><span>구매 취소</span></th>
+          <th class="table-title"><span>구매 완료</span></th>
+          <th class="table-title"><span>구매 시간</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <TransactionsItem
+        v-for="product in indexStore.transactions"
         :key="product.id"
-        :product="product">
-        {{ product.title }}
-        {{ product.user.email }}
-        {{ product.user.displayName }}
-        {{ product.user.profileImg }}
-
-        <div class="isCanceled">
-          <input type="checkbox" id="isCanceled" class="checkbox" v-model="canceled">
-          <label for="isCanceled">isCanceled: {{ isCanceled }}</label>
-        </div>
-        <div class="done">
-          <input type="checkbox" id="done" class="checkbox" v-model="done">
-          <label for="done">done: {{ done }}</label>
-        </div>
-      </li>
-    </ul>
+        :product="product" />
+      </tbody>
+    </table>
   </main>
 </template>
 
 <script>
 import { mapStores } from 'pinia'
 import { useIndexStore } from '~/store'
+import TransactionsItem from '~/components/TransactionsItem.vue'
 
 export default {
-  data() {
-    return {
-      isCanceled: false,
-      done: false
-    }
+  components: {
+    TransactionsItem
   },
   computed: {
     ...mapStores(useIndexStore)
   },
-  created() {
-    this.indexStore.allTransactions()
-  },
-  methods: {
-    canceled() {
-      const detailId = this.$route.params.detailId
-      if (this.isCanceled) {
-        this.indexStore.transactionsCanceled({
-          detailId,
-          isCanceled: true
-        })
-      } else {
-        this.indexStore.transactionsCanceled({
-          detailId,
-          isCanceled: false
-        })
-      }
-    },
-    done() {
-      const detailId = this.$route.params.detailId
-      if (this.done) {
-        this.indexStore.transactionsCanceled({
-          detailId,
-          done: true
-        })
-      } else {
-        this.indexStore.transactionsCanceled({
-          detailId,
-          done: false
-        })
-      }
-    }
+  async created() {
+    await this.indexStore.allTransactions()
   }
 }
 </script>
@@ -79,11 +48,31 @@ export default {
 main {
   width: 100%;
   min-height: 100vh;
-  background-color: #eee;
-}
-.checkbox {
-  width: 10px;
-  height: 10px;
-  background: #000;
+  background-color: #fff;
+  border: 1px solid #e6e6e6;
+  padding: 0 40px 60px;
+  box-sizing: border-box;
+  .page-title {
+    padding: 42px 0 8px;
+    margin-bottom: 38px;
+    border-bottom: 1px solid #2d2e32;
+    font-size: 32px;
+    position: relative;
+  }
+  table {
+    width: 100%;
+    border: 1px solid #e4e4e4;
+    tr, th {
+      border: 1px solid #e4e4e4;
+    }
+    th {
+      padding: 10px;
+    }
+    .table-title {
+      min-width: 100px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
 }
 </style>
