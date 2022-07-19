@@ -41,7 +41,8 @@
       {{ product.description }}
     </td>
     <td class="soldout box">
-      {{ product.isSoldOut }}
+      <span v-if="!product.isSoldOut">판매중</span>
+      <span v-else>매진</span>
     </td>
     <td class="delete box">
       <button class="delete-btn" @click="deleteProduct(product.id)">
