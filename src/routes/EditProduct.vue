@@ -7,7 +7,7 @@
         <article class="info-box">
           <p>이모티콘 썸네일</p>
           <img :src="thumbnailBase64" :alt="title">
-          <input type="file"  @change="thumbnailBase64Img">
+          <input type="file" @change="thumbnailBase64Img">
         </article>
         <article class="info-box">
           <p>이모티콘 상품명</p>
@@ -26,7 +26,7 @@
           <input type="text" v-model.number="price">
         </article>
         <article class="info-box">
-          <p v-if="isSoldOut">이모티콘 판매중</p>
+          <p v-if="!isSoldOut">이모티콘 판매중</p>
           <p v-else>이모티콘 매진</p>
           <input type="checkbox" class="checkbox" v-model="isSoldOut">
         </article>
@@ -53,7 +53,7 @@ export default {
       default: ''
     },
     oldPrice: {
-      type: Number,
+      type: String,
       default: ''
     },
     oldDescription: {
@@ -68,13 +68,14 @@ export default {
       type: String,
       default: ''
     },
-    oldIsSoldout: {
+    oldIsSoldOut: {
       type: Boolean,
       default: false
     }
   },
   data() {
     return {
+      id: this.$route.params.id,
       title: this.oldTitle,
       price: this.oldPrice,
       description: this.oldDescription, 
@@ -89,56 +90,22 @@ export default {
   computed: {
     ...mapStores(useIndexStore)
   },
-  created() {
-    this.indexStore.productDetails(this.$route.params.id)
+  async created() {
+    await this.indexStore.productDetails(this.$route.params.id)
+    console.log(this.$route.params.id)
   },
   methods: {
     editProduct() {
-      if (this.changeThumbnail && this.changePhoto) {
-        this.indexStore.editProduct({
-          id: this.$route.params.id,
-          title: this.title,
-          price: this.price,
-          description: this.description, 
-          tags: this.tags.split(','), 
-          thumbnailBase64: this.thumbnailBase64,
-          photoBase64: this.photoBase64, 
-          isSoldOut: this.isSoldOut
-        })
-      } else if (this.changeThumbnail && !this.changePhoto) {
-        this.indexStore.editProduct({
-          id: this.$route.params.id,
-          title: this.title,
-          price: this.price,
-          description: this.description, 
-          tags: this.tags.split(','), 
-          thumbnailBase64: this.thumbnailBase64,
-          photoBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
-          isSoldOut: this.isSoldOut
-        })
-      } else if (!this.changeThumbnail && this.changePhoto) {
-        this.indexStore.editProduct({
-          id: this.$route.params.id,
-          title: this.title,
-          price: this.price,
-          description: this.description, 
-          tags: this.tags.split(','), 
-          thumbnailBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
-          photoBase64: this.photoBase64, 
-          isSoldOut: this.isSoldOut
-        })
-      } else {
-        this.indexStore.editProduct({
-          id: this.$route.params.id,
-          title: this.title,
-          price: this.price,
-          description: this.description, 
-          tags: this.tags.split(','), 
-          thumbnailBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
-          photoBase64: /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
-          isSoldOut: this.isSoldOut
-        })
-      }
+      this.indexStore.editProduct({
+        id: this.$route.params.id,
+        title: this.title,
+        price: this.price,
+        description: this.description, 
+        tags: this.tags.split(','), 
+        thumbnailBase64: this.changeThumbnail ? this.thumbnailBase64 : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
+        photoBase64: this.changePhoto ? this.photoBase64 : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
+        isSoldOut: this.isSoldOut
+      })
     },
     thumbnailBase64Img(event) {
       this.changeThumbnail = true
