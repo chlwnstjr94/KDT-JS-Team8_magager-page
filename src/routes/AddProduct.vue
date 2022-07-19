@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       title: '',
-      price: '',
+      price: 0,
       description: '', 
       tags: '', 
       thumbnailBase64: '', 
