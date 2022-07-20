@@ -5,6 +5,7 @@
     <table>
       <thead>
         <tr>
+          <th class="table-title"><span>구매 상태 수정</span></th>
           <th class="table-title"><span>구매 이미지</span></th>
           <th class="table-title"><span>구매자</span></th>
           <th class="table-title"><span>구매자 이메일</span></th>
@@ -52,7 +53,10 @@ main {
   border: 1px solid #e6e6e6;
   padding: 0 40px 60px;
   box-sizing: border-box;
+  overflow: auto;
   .page-title {
+    width: 100%;
+    display: block;
     padding: 42px 0 8px;
     margin-bottom: 38px;
     border-bottom: 1px solid #2d2e32;
@@ -67,6 +71,7 @@ main {
     }
     th {
       padding: 10px;
+      white-space: nowrap;
     }
     .table-title {
       min-width: 100px;

@@ -1,5 +1,10 @@
 <template>
   <tr class="product-list">
+    <td class="edit box">
+      <button class="edit-btn" @click="purchaseState">
+        <ion-icon name="create-outline"></ion-icon>
+      </button>
+    </td>
     <td class="thumbnail box">
       <img :src="product.product.thumbnail" :alt="product.product.title">
     </td>
@@ -133,12 +138,38 @@ export default {
         }
       }
     }
+    .edit-btn {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #2d2e32;
+      border-radius: 10px;
+      transition: 0.3s;
+      ion-icon {
+        width: 20px;
+        height: 20px;
+        color: #2d2e32;
+      }
+      &:hover {
+        background: #ff9900;
+        border: 1px solid #f97400;
+        transition: 0.3s;
+        ion-icon {
+          color: #fcfcfc;
+        }
+      }
+    }
+    &.timePaid {
+      white-space: nowrap;
+    }
   }
   .isCanceled, .done {
     label {
       display: block;
       &:last-child {
         margin-top: 10px;
+      }
+      span {
+        white-space: nowrap;
       }
     }
   }
