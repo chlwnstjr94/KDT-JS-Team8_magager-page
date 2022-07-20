@@ -15,8 +15,8 @@
             </label>
             <input class="input-file thumbnail" type="file" @change="thumbnailBase64Img">
           </div>
-          <div v-if="thumbnailBase64" class="img-box">
-            <img :src="thumbnailBase64" :alt="title">
+          <div v-if="thumbnail" class="img-box">
+            <img :src="thumbnail" :alt="title">
           </div>
           <div v-else class="img-box">
             <ion-icon name="cloud-upload-outline"></ion-icon>
@@ -53,7 +53,7 @@
 
         <article class="item-box">
           <label for="isSoldOut">
-            <span v-if="!isSoldOut" class="title">이모티콘 판매중</span>
+            <span v-if="!this.indexStore.product.isSoldOut" class="title">이모티콘 판매중</span>
             <span v-else class="title">이모티콘 매진</span>
           </label>
           <label class="checkbox-box">
@@ -71,11 +71,11 @@
           <input class="input-file" type="file" @change="photoBase64Img">
         </article>
         <div class="photo-box">
-          <div v-if="!photoBase64" class="img-box">
+          <div v-if="!photo" class="img-box">
             <img :src="indexStore.product.photo" :alt="title">
           </div>
           <div v-else class="img-box">
-            <img :src="photoBase64" :alt="title">
+            <img :src="photo" :alt="title">
           </div>
         </div>
 
@@ -109,7 +109,7 @@ export default {
       type: Array,
       default: () => []
     },
-    oldThumbnailBase64: {
+    oldThumbnail: {
       type: String,
       default: ''
     },
@@ -125,9 +125,9 @@ export default {
       price: this.oldPrice,
       description: this.oldDescription, 
       tags: this.oldTags, 
-      thumbnailBase64: this.oldThumbnailBase64, 
-      photoBase64: this.photoBase64,
-      isSoldOut: this.oldIsSoldout,
+      thumbnail: this.oldThumbnail, 
+      photo: this.photo,
+      isSoldOut: this.oldIsSoldOut,
       changeThumbnail: false,
       changePhoto: false
     }
@@ -137,6 +137,7 @@ export default {
   },
   async created() {
     await this.indexStore.productDetails(this.$route.params.id)
+    console.log('this.indexStore.product:', this.indexStore.product)
     console.log(this.$route.params.id)
   },
   methods: {
@@ -147,8 +148,8 @@ export default {
         price: this.price,
         description: this.description, 
         tags: this.tags.split(','), 
-        thumbnailBase64: this.changeThumbnail ? this.thumbnailBase64 : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnailBase64) && '',
-        photoBase64: this.changePhoto ? this.photoBase64 : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photoBase64) && '', 
+        thumbnailBase64: this.changeThumbnail ? this.thumbnail : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.thumbnail) && '',
+        photoBase64: this.changePhoto ? this.photo : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photo4) && '', 
         isSoldOut: this.isSoldOut
       })
     },
@@ -159,7 +160,7 @@ export default {
         const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.addEventListener('load', event => {
-          this.thumbnailBase64 = event.target.result
+          this.thumbnail = event.target.result
         })
       }
     },
@@ -170,7 +171,7 @@ export default {
         const reader = new FileReader()
         reader.readAsDataURL(file)
         reader.addEventListener('load', event => {
-          this.photoBase64 = event.target.result
+          this.photo = event.target.result
         })
       }
     }

@@ -10,7 +10,7 @@
             oldPrice: product.price,
             oldDescription: product.description,
             oldTags: product.tags.toString(),
-            oldThumbnailBase64: product.thumbnail,
+            oldThumbnail: product.thumbnail,
             oldIsSoldOut: product.isSoldOut
           }
         }">
@@ -66,8 +66,8 @@ export default {
   computed: {
     ...mapStores(useIndexStore)
   },
-  create() {
-    console.log(this.product.photo)
+  created() {
+    console.log('this.product ::', this.product)
   },
   methods: {
     deleteProduct(id) {
