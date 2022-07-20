@@ -101,7 +101,6 @@ export const useIndexStore = defineStore('index', {
     async transactionsCanceled(payload) {
       const { detailId, isCanceled, done } = payload
       const res = await axios({
-        detailId,
         url: `https://asia-northeast3-heropy-api.cloudfunctions.net/api/products/transactions/${detailId}`,
         method: 'PUT',
         headers: {
@@ -115,6 +114,7 @@ export const useIndexStore = defineStore('index', {
           done
         }
       })
+      console.log(res.data)
       this.transactions = res.data
     },
 

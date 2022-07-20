@@ -11,7 +11,7 @@
           <th class="table-title"><span>제품 가격</span></th>
           <th class="table-title"><span>제품 태그</span></th>
           <th class="table-title"><span>제품 상세 내용</span></th>
-          <th class="table-title"><span>제품 판매/매진</span></th>
+          <th class="table-title"><span>제품 판매 / 매진</span></th>
           <th class="table-title"><span>제품 삭제</span></th>
         </tr>
       </thead>
@@ -79,6 +79,7 @@ main {
     }
     th {
       padding: 10px;
+      white-space: nowrap;
     }
     .table-title {
       min-width: 100px;
