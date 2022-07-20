@@ -28,10 +28,10 @@ export default {
 .body {
   background: #FCFCFC;
   .main {
-  display: flex;
-  align-items: flex-start;
-  margin: 20px 10px;
-  gap: 10px;
-}
+    display: flex;
+    align-items: flex-start;
+    margin: 20px 10px;
+    gap: 10px;
+  }
 }
 </style>
