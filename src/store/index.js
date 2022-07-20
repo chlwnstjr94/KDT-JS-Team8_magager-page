@@ -117,7 +117,7 @@ export const useIndexStore = defineStore('index', {
       console.log(res.data)
       this.transactions = res.data
 
-      this.$router.push('/transactionsall')
+      await this.allTransactions()
     },
 
     async editProduct(payload) {
