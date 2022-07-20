@@ -5,13 +5,13 @@
         <div v-if="userStore.displayName" class="nav-profile">
           <div class="profile-img">
             <img v-if="userStore.img" :src="userStore.img" alt="profile-default" />
-            <img v-else src="/assets/profile_default.png" alt="profile-default" />
+            <img v-else src="profile_default.png" alt="profile-default" />
           </div>
           <div class="profile-name">{{ this.userStore.displayName }}</div>
         </div>
         <RouterLink v-else to="/login" class="nav-profile">
           <div class="profile-img">
-            <img src="/assets/profile_default.png" alt="profile-default" />
+            <img src="profile_default.png" alt="profile-default" />
           </div>
           <div class="profile-name">로그인</div>
         </RouterLink>
