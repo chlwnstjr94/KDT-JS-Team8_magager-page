@@ -142,7 +142,7 @@ export const useIndexStore = defineStore('index', {
       console.log(res.data)
       this.product = res.data
 
-      window.location.href = '/allproduct'
+      // window.location.href = '/allproduct'
     },
 
     async deleteProduct(id) {
