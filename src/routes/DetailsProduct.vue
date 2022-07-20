@@ -23,12 +23,14 @@
         <p class="detail-description">{{ indexStore.product.description }}</p>
       </article>
     </section>
-    <div class="photo-box">
-      <img 
-      class="detail-photo"
-      :src="indexStore.product.photo" 
-      :alt="indexStore.product.title">
-    </div>
+    <section class="photo-box">
+      <div class="photo-img-box">
+        <img 
+        class="detail-photo"
+        :src="indexStore.product.photo" 
+        :alt="indexStore.product.title">
+      </div>
+    </section>
   </main>
 </template>
 
@@ -69,11 +71,12 @@ main {
   background-color: #fff;
   border: 1px solid #e6e6e6;
   .detail-box {
-    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
     padding: 90px 80px 40px;
     display: flex;
     justify-content: center;
-    flex-grow: 1;
+    gap: 40px;
     .detail-img-box {
       width: 300px;
       display: flex;
@@ -84,6 +87,7 @@ main {
       }
     }
     .detail-info {
+      flex-grow: 1;
       .detail-title {
         font-size: 30px;
         font-weight: bold;
@@ -106,10 +110,15 @@ main {
     }
   }
   .photo-box {
+    width: 100%;
     background: #fafafa;
-    padding: 0 40px;
-    .detail-photo {
-      width: 100%;
+    padding: 0 80px;
+    .photo-img-box {
+      max-width: 1024px;
+      margin: 0 auto;
+      .detail-photo {
+        width: 100%;
+      }
     }
   }
 }

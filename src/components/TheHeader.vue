@@ -1,7 +1,6 @@
 <template>
-  <header>
-    <!-- header -->
-    <div class="head" @click="this.userStore.authUser">
+  <header class="header">
+    <div class="head">
       <div class="head__inner">
         <RouterLink to="/">
           <div class="head-title">kakao<strong>emoticon</strong> studio</div>
@@ -15,68 +14,49 @@
 import { mapStores } from 'pinia'
 import { useUserStore } from '~/store/user'
 export default {
-  data() {
-    return {
-      current: false,
-      searchOn: false,
-      leftNavOn: false,
-      popupOn: false,
-      searchValue: '',
-      // email: '',
-      // displayName: '로그인 해주세요',
-      // img: '',
-      // header에 프로필 화면 보여주는 변수
-      // img: this.userStore.img || 'profile_default.png',
-      // user: this.userStore.user || '',
-    }
-  },
-  created() {
-    //this.userStore.authUser()
-  },
   computed: {
     ...mapStores(useUserStore),
-  },
-  methods: {
-    isMatch(path) {
-      if (!path) return false
-      return path.test(this.$route.fullPath)
-    },
-  },
-  watch: {},
+  }
 }
 </script>
 <style lang="scss" scoped>
 $head-height: 60px;
-header {
+.header {
   width: 100%;
   height: $head-height;
-}
-.head {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  min-width: 300px;
-  background-color: #393A3E;
-  .head__inner {
-  height: $head-height;
-  padding: 0 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  .head-title {
-  font-size: 25px;
-  color: #fff;
-  white-space: nowrap;
-  strong {
-    font-weight: 700;
-  }
-}
-.go-store {
-  color: #fff;
-}
+  .head {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    min-width: 300px;
+    background-color: #393A3E;
+    .head__inner {
+      height: $head-height;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      .head-title {
+        width: 258px;
+        height: 42px;
+        display: inline-block;
+        background: url(https://emoticonstudio.kakao.com/assets/ico_studio_211202@2x-40be605c8caddc13e9f27e829c8534005dfc5fbc41e9cd5fb616c6b8b73f239b.png);
+        background-size: 300px 450px;
+        text-indent: -9999px;
+        font-size: 25px;
+        color: #fff;
+        white-space: nowrap;
+        strong {
+          font-weight: 700;
+        }
+      }
+      .go-store {
+        color: #fff;
+      }
+    }
   }
 }
 </style>

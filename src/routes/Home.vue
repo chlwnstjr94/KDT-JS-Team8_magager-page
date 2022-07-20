@@ -1,6 +1,8 @@
 <template>
   <main>
-    <div class="img-emoticon">Open stuido</div>
+    <div class="head-box">
+      <div class="img-emoticon">Open stuido</div>
+    </div>
 
     <ul class="product-list">
       <AllProductsList
@@ -40,14 +42,22 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  .img-emoticon {
-    width: 188px;
-    height: 37px;
-    background: url(https://emoticonstudio.kakao.com/assets/img_emoticon-ea608e99e1dc9b9ce96ee6e5a5e906ff88d982ff4c564358eb2dd6420a47d551.png) no-repeat;
-    background-position: 0 -340px;
-    text-indent: -9999px;
-    position: relative;
-    top: -10px;
+  padding: 0 40px 60px;
+  .head-box {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 42px 0 8px;
+    margin-bottom: 32px;
+    .img-emoticon {
+      width: 188px;
+      height: 37px;
+      background: url(https://emoticonstudio.kakao.com/assets/img_emoticon-ea608e99e1dc9b9ce96ee6e5a5e906ff88d982ff4c564358eb2dd6420a47d551.png) no-repeat;
+      background-position: 0 -340px;
+      text-indent: -9999px;
+      position: relative;
+    }
   }
   .product-list {
     margin-top: 20px;
