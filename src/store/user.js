@@ -4,7 +4,6 @@ import { setTransitionHooks } from 'vue'
 export const useUserStore = defineStore('user', {
   state() {
     return {
-      user: '',
       email: '',
       displayName: '',
       accessToken: '',
@@ -14,10 +13,8 @@ export const useUserStore = defineStore('user', {
   actions: {
     // LOGIN
     async loginUser(payload) {
-      const { email, password, validation } = payload
-      if (!validation()) {
-        return
-      }
+      const { email, password } = payload
+
       try {
         const res = await axios(
           'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/login',
@@ -34,12 +31,15 @@ export const useUserStore = defineStore('user', {
             },
           }
         )
-        console.log(res.data)
-        const { user, accessToken } = res.data
+
+        const { user, accessToken } = await res.data
         window.localStorage.setItem('token', accessToken)
-        this.user = user
+        console.log(user, accessToken)
+        this.email = user.email
+        this.displayName = user.displayName
         this.accessToken = accessToken
         this.img = user.profileImg
+        console.log(this.user)
         if (res.status === 200) {
           alert('로그인이 완료되었습니다')
           this.$router.push('/')
@@ -56,10 +56,8 @@ export const useUserStore = defineStore('user', {
     },
     // SIGNUP
     async signUpUser(payload) {
-      const { email, password, passwordConfirm, displayName, img, validation } = payload
-      if (!validation()) {
-        return
-      }
+      const { email, password, passwordConfirm, displayName, img } = payload
+
       try {
         const res = await axios(
           'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/signup',
@@ -102,14 +100,15 @@ export const useUserStore = defineStore('user', {
               'content-type': 'application/json',
               apikey: 'FcKdtJs202204',
               username: 'KDT2TEAM8',
-              Authorization: `Bearer ${this.accessToken}`,
+              Authorization: `Bearer ${window.localStorage.getItem('token')}`,
             },
           }
         )
         localStorage.removeItem('token')
-        this.user = ''
+        this.displayName = ''
+        this.email = ''
+        this.img = ''
         this.accessToken = ''
-        console.log(res)
       } catch (err) {
         console.log(err)
       }
@@ -132,11 +131,11 @@ export const useUserStore = defineStore('user', {
             },
           }
         )
-        console.log(res.data)
-        // const { email, displayName, profileImg } = res.data
-        // this.email = email
-        // this.displayName = displayName
-        // this.img = profileImg
+        const { email, displayName, profileImg } = res.data
+        this.email = email
+        this.displayName = displayName
+        this.img = profileImg
+        // console.log(res.data)
         // console.log(this.email, this.displayName, this.img)
         return res.data
       } catch (err) {
@@ -145,11 +144,7 @@ export const useUserStore = defineStore('user', {
     },
     // MODIFYUSER
     async modifyUser(payload) {
-      console.log(payload)
-      const { email, displayName, img, password, validation } = payload
-      if (!validation()) {
-        return
-      }
+      const { email, displayName, img, password } = payload
       try {
         const res = await axios(
           'https://asia-northeast3-heropy-api.cloudfunctions.net/api/auth/user',
@@ -159,7 +154,7 @@ export const useUserStore = defineStore('user', {
               'content-type': 'application/json',
               apikey: 'FcKdtJs202204',
               username: 'KDT2TEAM8',
-              Authorization: this.accessToken,
+              Authorization: `Bearer ${this.accessToken}`,
             },
             data: {
               email,

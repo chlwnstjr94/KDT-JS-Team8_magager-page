@@ -2,19 +2,20 @@
   <nav>
     <div class="nav_inner">
       <section class="user-info">
-        <RouterLink v-if="!userStore.user" to="/login" class="nav-profile">
-          <div class="profile-big">
-            <img class="profile-img" src="profile_default.png" alt="profile-default" />
+        <div v-if="userStore.displayName" class="nav-profile">
+          <div class="profile-img">
+            <img v-if="userStore.img" :src="userStore.img" alt="profile-default" />
+            <img v-else src="/assets/profile_default.png" alt="profile-default" />
+          </div>
+          <div class="profile-name">{{ this.userStore.displayName }}</div>
+        </div>
+        <RouterLink v-else to="/login" class="nav-profile">
+          <div class="profile-img">
+            <img src="/assets/profile_default.png" alt="profile-default" />
           </div>
           <div class="profile-name">로그인</div>
         </RouterLink>
-        <RouterLink v-else to="/mypage" class="nav-profile">
-          <div class="profile-big">
-            <img class="profile-img" src="profile_default.png" alt="profile-default" />
-          </div>
-          <div class="profile-name">{{ this.userStore.user.displayName }}</div>
-        </RouterLink>
-        <button v-if="userStore.user" @click="userStore.logoutUser" class="logout-btn">
+        <button v-if="userStore.displayName" @click="userStore.logoutUser" class="logout-btn">
           <RouterLink to="/" class="logout-link">로그아웃</RouterLink>
         </button>
       </section>
@@ -72,6 +73,12 @@ nav {
         height: 98px;
         margin: 0 auto 16px;
         border-radius: 50%;
+        img {
+          width: 98px;
+          height: 98px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
       }
       .profile-name {
         display: block;
