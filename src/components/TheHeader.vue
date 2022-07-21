@@ -5,7 +5,7 @@
         <RouterLink to="/">
           <div class="head-title">kakao<strong>emoticon</strong> studio</div>
         </RouterLink>
-        <a href="#" class="go-store">메인 페이지로</a>
+        <a href="https://luminous-mandazi-e5ba79.netlify.app/" class="go-store">메인 페이지로</a>
       </div>
     </div>
   </header>
