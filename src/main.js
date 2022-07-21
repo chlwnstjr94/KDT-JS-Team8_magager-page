@@ -1,6 +1,7 @@
 import { createApp, markRaw } from 'vue'
 import App from '~/App.vue'
 import router from '~/routes'
+import '~/routes/guards'
 import { createPinia } from 'pinia'
 
 const pinia = createPinia()

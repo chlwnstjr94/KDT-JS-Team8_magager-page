@@ -6,8 +6,7 @@ export async function validateTokenUser() {
     headers: {
       'content-type': 'application/json',
       apikey: 'FcKdtJs202204',
-      username: 'KDTTEAM8',
-      masterkey: true,
+      username: 'KDT2TEAM8',
       Authorization: `Bearer ${accessToken}`,
     },
   })

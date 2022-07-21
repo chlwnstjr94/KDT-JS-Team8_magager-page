@@ -46,6 +46,10 @@ export default {
   },
   methods: {
     login() {
+      if (this.email !== 'testAdmin@admin.com') {
+        alert('관리자 계정으로 로그인하세요')
+        return
+      }
       this.userStore.loginUser({
         email: this.email,
         password: this.password,
