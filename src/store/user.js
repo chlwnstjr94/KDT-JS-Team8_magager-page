@@ -41,15 +41,24 @@ export const useUserStore = defineStore('user', {
         this.img = user.profileImg
         console.log(this.user)
         if (res.status === 200) {
-          alert('로그인이 완료되었습니다')
+          this.$swal({
+            title: '로그인이 완료되었습니다!',
+            icon: 'success'
+          })
           this.$router.push('/')
         }
       } catch (err) {
         if (err.response.data === '이메일 혹은 비밀번호가 일치하지 않습니다.') {
-          alert('아이디와 비밀번호를 확인 해주세요.')
+          this.$swal({
+            title: '아이디와 비밀번호를 확인 해주세요!',
+            icon: 'warning'
+          })
         }
         if (err.response.data === '유효한 사용자가 아닙니다.') {
-          alert('회원가입을 해주세요.')
+          this.$swal({
+            title: '회원가입을 해주세요!',
+            icon: 'warning'
+          })
           this.$router.push('/signup')
         }
       }
@@ -79,12 +88,18 @@ export const useUserStore = defineStore('user', {
         const { user, accessToken } = res.data
         window.localStorage.setItem('token', accessToken)
         if (res.status === 200) {
-          alert('회원가입이 완료되었습니다. 로그인 해주세요!')
+          this.$swal({
+            title: '회원가입이 완료되었습니다. 로그인 해주세요!',
+            icon: 'success'
+          })
           this.$router.push('/login')
         }
       } catch (err) {
         if (err.response.data === '이미 존재하는 사용자입니다.') {
-          alert('이미 존재하는 아이디입니다!')
+          this.$swal({
+            title: '이미 존재하는 아이디입니다!',
+            icon: 'warning'
+          })
           this.$router.push('/login')
         }
       }
@@ -165,7 +180,10 @@ export const useUserStore = defineStore('user', {
           }
         )
         if (res.data.status === 200) {
-          alert('수정이 완료 되었습니다!')
+          this.$swal({
+            title: '수정이 완료 되었습니다!',
+            icon: 'success'
+          })
         }
         this.$router.push('/')
       } catch (err) {

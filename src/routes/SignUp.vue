@@ -86,16 +86,28 @@ export default {
     },
     validation() {
       if (this.emailValidation() === false) {
-        alert('이메일 형식을 확인해주세요!')
+        this.$swal({
+          title: '이메일 형식을 확인해주세요!',
+          icon: 'warning'
+        })
         return false
       } else if (!this.displayName.trim()) {
-        alert('이름을 입력해주세요!')
+        this.$swal({
+          title: '이름을 입력해주세요!',
+          icon: 'warning'
+        })
         return false
       } else if (this.password.length < 8) {
-        alert('패스워드를 8자 이상 입력해주세요!')
+        this.$swal({
+          title: '패스워드를 8자 이상 입력해주세요!',
+          icon: 'warning'
+        })
         return false
       } else if (this.password !== this.passwordConfirm) {
-        alert('입력하신 패스워드가 다릅니다!')
+        this.$swal({
+          title: '입력하신 패스워드가 다릅니다!',
+          icon: 'warning'
+        })
         return false
       } else return true
     },

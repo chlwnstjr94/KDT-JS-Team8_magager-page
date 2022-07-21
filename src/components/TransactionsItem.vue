@@ -81,6 +81,12 @@ export default {
         isCanceled: this.isCanceled,
         done: this.done
       })
+      this.$swal({
+        title: '수정 완료!',
+        text: '제품이 수정 되었습니다!',
+        icon: 'success',
+        width: 500
+      })
     }
   }
 }

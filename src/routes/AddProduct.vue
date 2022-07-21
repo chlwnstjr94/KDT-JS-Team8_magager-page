@@ -99,6 +99,54 @@ export default {
   },
   methods: {
     addProduct() {
+      if (!this.thumbnailBase64) {
+        this.$swal({
+          title: '썸네일이 없습니다!',
+          text: '썸네일을 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
+      if (!this.title) {
+        this.$swal({
+          title: '상품명이 없습니다!',
+          text: '상품명을 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
+      if (!this.tags) {
+        this.$swal({
+          title: '태그가 없습니다!',
+          text: '태그를 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
+      if (!this.description) {
+        this.$swal({
+          title: '상세 설명이 없습니다!',
+          text: '상세 설명을 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
+      if (!this.price) {
+        this.$swal({
+          title: '가격이 없습니다!',
+          text: '가격을 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
+      if (!this.photoBase64) {
+        this.$swal({
+          title: '상세 사진이 없습니다!',
+          text: '상세 사진을 입력해주세요!',
+          icon: 'warning'
+        })
+        return
+      }
       this.indexStore.addProduct({
         title: this.title,
         price: this.price,
@@ -106,6 +154,16 @@ export default {
         tags: this.tags.split(','), 
         thumbnailBase64: this.thumbnailBase64, 
         photoBase64: this.photoBase64
+      })
+      this.$swal({
+        title: '제품 추가 완료!',
+        text: `${this.title} 제품이 추가 되었습니다!`,
+        icon: 'success',
+        imageUrl: this.thumbnailBase64,
+        width: 500,
+        willClose: () => {
+          this.$router.push('/')
+        }
       })
     },
     thumbnailBase64Img(event) {

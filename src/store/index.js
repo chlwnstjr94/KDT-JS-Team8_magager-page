@@ -48,7 +48,6 @@ export const useIndexStore = defineStore('index', {
         console.log(res.data)
         this.allProducts = res.data
 
-        this.$router.push('/')
       } catch {
         console.log(error.response.data)
       }
@@ -143,8 +142,6 @@ export const useIndexStore = defineStore('index', {
       })
       console.log(res.data)
       this.product = res.data
-
-      this.$router.push('/allproduct')
     },
 
     async deleteProduct(id) {

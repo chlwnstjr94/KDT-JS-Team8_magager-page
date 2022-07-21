@@ -72,6 +72,15 @@ export default {
   methods: {
     deleteProduct(id) {
       this.indexStore.deleteProduct(id)
+      this.$swal({
+        title: '삭제 완료!',
+        text: '제품이 삭제 되었습니다!',
+        icon: 'success',
+        width: 500,
+        willClose: () => {
+          this.$router.push('/allproduct')
+        }
+      })
     }
   }
 }

@@ -64,10 +64,16 @@ export default {
       const expressEmail =
         /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/
       if (expressEmail.test(this.email) === false) {
-        alert('이메일을 확인해주세요')
+        this.$swal({
+          title: '이메일을 확인해주세요!',
+          icon: 'warning'
+        })
         return false
       } else if (this.password.length < 8) {
-        alert('패스워드를 8자 이상 입력해주세요')
+        this.$swal({
+          title: '패스워드를 8자 이상 입력해주세요!',
+          icon: 'warning'
+        })
         return false
       }
       return true

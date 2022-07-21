@@ -152,6 +152,16 @@ export default {
         photoBase64: this.changePhoto ? this.photo : /(\.gif|\.jpg|\.jpeg|\.webp)$/i.test(this.photo4) && '', 
         isSoldOut: this.isSoldOut
       })
+      this.$swal({
+        title: '수정 완료!',
+        text: `${this.title} 제품이 수정 되었습니다!`,
+        icon: 'success',
+        imageUrl: this.indexStore.product.thumbnail,
+        width: 500,
+        willClose: () => {
+          this.$router.push('/allproduct')
+        }
+      })
     },
     thumbnailBase64Img(event) {
       this.changeThumbnail = true

@@ -47,12 +47,24 @@ export default {
   methods: {
     login() {
       if (this.email !== 'testAdmin@admin.com') {
-        alert('관리자 계정으로 로그인하세요')
+        this.$swal({
+          title: '관리자 계정이 아닙니다!',
+          icon: 'error'
+        })
         return
       }
       this.userStore.loginUser({
         email: this.email,
         password: this.password,
+      })
+      this.$swal({
+        title: '로그인 완료!',
+        text: '로그인이 완료되었습니다.',
+        icon: 'success',
+        width: 500,
+        willClose: () => {
+          this.$router.push('/')
+        }
       })
     },
 
