@@ -35,3 +35,9 @@ export default {
   }
 }
 </style>
+
+<style>
+::-webkit-scrollbar {
+  width: 0;
+}
+</style>
