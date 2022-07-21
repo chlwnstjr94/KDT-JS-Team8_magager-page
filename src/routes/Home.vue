@@ -43,6 +43,7 @@ main {
   align-items: center;
   justify-content: center;
   padding: 0 40px 60px;
+  position: relative;
   .head-box {
     width: 100%;
     display: flex;
@@ -50,6 +51,8 @@ main {
     align-items: center;
     padding: 42px 0 8px;
     margin-bottom: 32px;
+    position: absolute;
+    top: 0;
     .img-emoticon {
       width: 188px;
       height: 37px;
