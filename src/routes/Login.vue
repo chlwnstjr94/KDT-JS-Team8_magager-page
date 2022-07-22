@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     login() {
-      if (this.email !== 'testAdmin@admin.com') {
+      if (this.email !== 'EmoticonZZang@gmail.com') {
         this.$swal({
           title: '관리자 계정이 아닙니다!',
           icon: 'error'

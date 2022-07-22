@@ -11,7 +11,7 @@ router.beforeEach(async (to) => {
       return '/login'
     } else {
       const user = await validateTokenUser(accessToken)
-      if (user.data.email === 'testAdmin@admin.com') {
+      if (user.data.email === 'EmoticonZZang@gmail.com') {
         return true
       } else {
         console.log('관리자가 아닙니다!')
@@ -28,7 +28,7 @@ router.beforeEach(async (to) => {
       return '/login'
     } else {
       const user = await validateTokenUser(accessToken)
-      if (user.data.email === 'testAdmin@admin.com') {
+      if (user.data.email === 'EmoticonZZang@gmail.com') {
         return true
       } else {
         console.log('관리자가 아닙니다!')
@@ -45,7 +45,7 @@ router.beforeEach(async (to) => {
       return '/login'
     } else {
       const user = await validateTokenUser(accessToken)
-      if (user.data.email === 'testAdmin@admin.com') {
+      if (user.data.email === 'EmoticonZZang@gmail.com') {
         return true
       } else {
         console.log('관리자가 아닙니다!')
