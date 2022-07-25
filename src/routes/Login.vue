@@ -25,8 +25,6 @@
       <span v-if="passwordVali">비밀번호를 확인해주세요</span>
       <button :disabled="password.length <= 7">로그인</button>
     </form>
-    <RouterLink to="/searchuser">id나 비밀번호가 기억나지 않는다면?</RouterLink>
-    <RouterLink to="/signup">회원가입</RouterLink>
   </div>
 </template>
 <script>
