@@ -6,8 +6,6 @@ import TransactionsAll from './TransactionsAll.vue'
 import EditProduct from './EditProduct.vue'
 import DetailsProduct from './DetailsProduct.vue'
 import Login from './Login.vue'
-import SignUp from './SignUp.vue'
-import EditUser from './EditUser.vue'
 
 export default createRouter({
   history: createWebHistory(),
